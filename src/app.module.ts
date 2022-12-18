@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EmployeeModule } from './employee/employee.module';
 import { EmployeeService } from './employee/employee.service';
+import { ProjectModule } from './project/project.module';
 
 @Module({
   imports: [EmployeeModule,GraphQLModule.forRoot<ApolloDriverConfig>(
@@ -25,7 +26,8 @@ TypeOrmModule.forRoot({
   database:'employee',
   entities:["dist/**/*.entity{.ts,.js}"],
   synchronize:true
-})],
+}),
+ProjectModule],
   controllers: [AppController],
   providers: [AppService],
 })

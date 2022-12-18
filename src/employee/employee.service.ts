@@ -4,16 +4,21 @@ import { Repository } from 'typeorm';
 import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { Employee } from './entities/employee.entity';
+import { ProjectService } from './../project/project.service';
+import { Project } from 'src/project/entities/project.entity';
 
 @Injectable()
 export class EmployeeService {
 
-  constructor(@InjectRepository(Employee) private employeeRepository:Repository<Employee>){}
+  constructor(@InjectRepository(Employee) private employeeRepository:Repository<Employee>,
+  private projectService:ProjectService
+  ){}
   create(createEmployeeInput: CreateEmployeeInput) {
     return this.employeeRepository.save({
       name:createEmployeeInput .name,
       email:createEmployeeInput .email,
-      designation:createEmployeeInput.designation
+      designation:createEmployeeInput.designation,
+      projectId:createEmployeeInput.projectId
     });
   }
 
@@ -45,5 +50,9 @@ export class EmployeeService {
 
   remove(id) {
     return this.employeeRepository.delete({ id: id });
+  }
+
+  async getProject(id):Promise<Project>{
+return this.projectService.findOne(id);
   }
 }

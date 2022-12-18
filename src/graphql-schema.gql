@@ -2,33 +2,57 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Project {
+  id: String!
+  projectname: String!
+  employees: [Employee!]
+}
+
 type Employee {
   id: String!
   name: String!
   email: String!
   designation: String
+  project: Project!
+  projectId: String!
 }
 
 type Query {
   getAllEmployee: [Employee!]!
   oneEmployee(id: String!): Employee!
+  allProject: [Project!]!
+  oneProject(id: String!): Project!
 }
 
 type Mutation {
   createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
   updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
   removeEmployee(id: String!): Employee!
+  createProject(createProjectInput: CreateProjectInput!): Project!
+  updateProject(updateProjectInput: UpdateProjectInput!): Project!
+  removeProject(id: String!): Project!
 }
 
 input CreateEmployeeInput {
   name: String!
   email: String!
   designation: String
+  projectId: String!
 }
 
 input UpdateEmployeeInput {
   name: String
   email: String
   designation: String
+  projectId: String
+  id: String!
+}
+
+input CreateProjectInput {
+  projectname: String!
+}
+
+input UpdateProjectInput {
+  projectname: String
   id: String!
 }

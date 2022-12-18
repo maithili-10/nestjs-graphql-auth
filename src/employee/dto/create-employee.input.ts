@@ -17,4 +17,6 @@ export class CreateEmployeeInput {
   
   designation: String;
 
+  @Field()
+  projectId:String
 }
